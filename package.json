@@ -1,0 +1,37 @@
+{
+  "name": "wechat-inform",
+  "version": "1.0.0",
+  "description": "利用微信测试号进行自定义消息通知",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/index.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andiedie/wechat-inform.git"
+  },
+  "keywords": [
+    "wechat",
+    "inform"
+  ],
+  "author": "Andie <zchangan@163.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Andiedie/wechat-inform/issues"
+  },
+  "homepage": "https://github.com/Andiedie/wechat-inform#readme",
+  "dependencies": {
+    "axios": "^0.16.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "thunk-mocha": "^1.0.8"
+  }
+}
