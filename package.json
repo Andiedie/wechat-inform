@@ -4,7 +4,7 @@
   "description": "利用微信测试号进行自定义消息通知",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/index.test.js"
+    "test": "mocha -s 500 --require intelli-espower-loader test/index.test.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,9 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "intelli-espower-loader": "^1.0.1",
     "mocha": "^3.2.0",
+    "nock": "^9.0.13",
     "power-assert": "^1.4.2",
     "thunk-mocha": "^1.0.8"
   }

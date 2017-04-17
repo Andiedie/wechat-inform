@@ -11,7 +11,7 @@ module.exports = function (option) {
   wi.getAccessToken = atg;
 
   wi.getUserList = async function () {
-    let {data: {openid}} = await axios.get(userListUrl, {
+    let {data: {data: {openid}}} = await axios.get(userListUrl, {
       params: {
         access_token: await wi.getAccessToken()
       }
@@ -23,15 +23,17 @@ module.exports = function (option) {
   wi.send = async function (sendOption) {
     sendOption.template_id = sendOption.template_id || option.template_id;
     assert.strictEqual(typeof sendOption.template_id, 'string', 'template_id is required and must be a string');
-    // let userList = await wi.getUserList();
-    let {data} = await axios.post(sendUrl, sendOption, {
-      params: {
-        access_token: await wi.getAccessToken()
-      }
-    });
-    if (data.errcode !== 0) {
-      throw new Error(data.errmsg);
+    let userList = await wi.getUserList();
+    let pros = [];
+    for (let touser of userList) {
+      pros.push(await axios.post(sendUrl, Object.assign(sendOption, {touser}), {
+        params: {
+          access_token: await wi.getAccessToken()
+        }
+      }));
     }
+    await Promise.all(pros);
   };
+
   return wi;
 };
