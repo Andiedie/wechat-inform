@@ -1,11 +1,28 @@
 require('thunk-mocha')();
 const nock = require('nock');
-
-const wi = require('../index')({
-  appid: 'wx7961cd460b3edc18',
-  appsecret: '7c66149af5868a663e046f6bf56d2a62'
-});
 const assert = require('assert');
+
+const info = {
+  appid: '',
+  appsecret: '',
+  template_id: ''
+};
+const wi = require('../index')(info);
+
+describe('测试号信息', function () {
+  it('appid', function () {
+    assert(typeof info.appid === 'string');
+    assert(info.appid.length > 0);
+  });
+  it('appsecret', function () {
+    assert(typeof info.appsecret === 'string');
+    assert(info.appsecret.length > 0);
+  });
+  it('template_id', function () {
+    assert(typeof info.template_id === 'string');
+    assert(info.template_id.length > 0);
+  });
+});
 
 describe('access_token测试', function () {
   let at;
@@ -55,14 +72,6 @@ describe('功能测试', function () {
   });
 
   it('测试发送模板消息', async function () {
-    await wi.send({
-      template_id: 'b6USTY4-2hw8yg9HFWWvU0x_kloUsfO8oUSCKNyJUuI',
-      data: {
-        param: {
-          value: '参数Param',
-          color: '#2f9833'
-        }
-      }
-    });
+    await wi.send();
   });
 });

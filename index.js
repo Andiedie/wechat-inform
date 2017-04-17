@@ -19,8 +19,7 @@ module.exports = function (option) {
     return openid;
   };
 
-  // @param template_id url data {}
-  wi.send = async function (sendOption) {
+  wi.send = async function (sendOption = {}) {
     sendOption.template_id = sendOption.template_id || option.template_id;
     assert.strictEqual(typeof sendOption.template_id, 'string', 'template_id is required and must be a string');
     let userList = await wi.getUserList();
