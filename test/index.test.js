@@ -9,21 +9,6 @@ const info = {
 };
 const wi = require('../index')(info);
 
-describe('测试号信息', function () {
-  it('appid', function () {
-    assert(typeof info.appid === 'string');
-    assert(info.appid.length > 0);
-  });
-  it('appsecret', function () {
-    assert(typeof info.appsecret === 'string');
-    assert(info.appsecret.length > 0);
-  });
-  it('template_id', function () {
-    assert(typeof info.template_id === 'string');
-    assert(info.template_id.length > 0);
-  });
-});
-
 describe('access_token测试', function () {
   let at;
   it('测试过期自动重置', async function () {
