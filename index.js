@@ -19,15 +19,12 @@ module.exports = function (option) {
   };
 
   wi.send = async function (sendOption = {}) {
-    const template_id = sendOption.template_id || option.template_id;
-    assert(typeof template_id === 'string' && template_id, 'template_id is required and must be a string');
+    sendOption.template_id = sendOption.template_id || option.template_id;
+    assert(typeof sendOption.template_id === 'string' && sendOption.template_id, 'template_id is required and must be a string');
     let userList = await wi.getUserList();
     let promises = [];
     for (let touser of userList) {
-      promises.push(axios.post(sendUrl, {
-        template_id,
-        touser
-      }, {
+      promises.push(axios.post(sendUrl, { ...sendOption, touser }, {
         params: {
           access_token: await wi.getAccessToken()
         }
