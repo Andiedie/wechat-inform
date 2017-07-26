@@ -24,7 +24,7 @@ module.exports = function (option) {
     let userList = await wi.getUserList();
     let promises = [];
     for (let touser of userList) {
-      promises.push(axios.post(sendUrl, { ...sendOption, touser }, {
+      promises.push(axios.post(sendUrl, Object.assign(sendOption, {touser}), {
         params: {
           access_token: await wi.getAccessToken()
         }
