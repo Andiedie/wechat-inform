@@ -24,7 +24,7 @@ module.exports = function (option) {
     let userList = await wi.getUserList();
     let promises = [];
     for (let touser of userList) {
-      promises.push(axios.post(sendUrl, Object.assign(sendOption, {touser}), {
+      promises.push(axios.post(sendUrl, Object.assign({}, sendOption, {touser}), {
         params: {
           access_token: await wi.getAccessToken()
         }
@@ -35,3 +35,9 @@ module.exports = function (option) {
 
   return wi;
 };
+
+module.exports({
+  appid: 'wxaae54f8f380103e6',
+  appsecret: 'a6b40daa64d6e18f68b9f369930bac19',
+  template_id: 'AajfCZGe5g1SPg2lbJS68w56alzgZOF_lHDtzvsYpXA'
+}).send();
