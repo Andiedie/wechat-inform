@@ -21,16 +21,24 @@ module.exports = function (option) {
   wi.send = async function (sendOption = {}) {
     sendOption.template_id = sendOption.template_id || option.template_id;
     assert(typeof sendOption.template_id === 'string' && sendOption.template_id, 'template_id is required and must be a string');
-    let userList = await wi.getUserList();
-    let promises = [];
-    for (let touser of userList) {
-      promises.push(axios.post(sendUrl, Object.assign({}, sendOption, {touser}), {
+    if (sendOption.touser) {
+      return axios.post(sendUrl, sendOption, {
         params: {
           access_token: await wi.getAccessToken()
         }
-      }));
+      });
+    } else {
+      let userList = await wi.getUserList();
+      let promises = [];
+      for (let touser of userList) {
+        promises.push(axios.post(sendUrl, Object.assign({}, sendOption, {touser}), {
+          params: {
+            access_token: await wi.getAccessToken()
+          }
+        }));
+      }
+      return Promise.all(promises);
     }
-    await Promise.all(promises);
   };
 
   return wi;

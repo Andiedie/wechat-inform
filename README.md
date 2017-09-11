@@ -42,7 +42,7 @@ const wi = require('wechat-inform')(
 ```
 
 ## wi.send(option)
-向关注测试号的**所有用户**发送模板消息
+发送模板消息
 
 - `option.template_id <string>` default=初始化时的`template_id`
   模板需要在测试号页面手动添加
@@ -50,6 +50,8 @@ const wi = require('wechat-inform')(
   用户点击模板消息时跳转的链接
 - `option.data`
   定义模板中参数的值和颜色
+- `option.touser`
+  指定发送用户的OPENID，如果不提供，则默认向**全部用户**发送
 
 ```javascript
 wi.send({
@@ -71,7 +73,7 @@ wi.send({
 获取测试号的`access_token`
 
 - `force <boolean>` default =`false`
-	是否强制更新
+  是否强制更新
 - Returns: `<Promise <access_token>>`
 
 `access_token`可用于调用微信的其他测试号API, 有效时间为两个小时. 模块会自动在失效时更新, 确保通过此方法拿到的`access_token`是可用的.
@@ -79,7 +81,7 @@ wi.send({
 ```javascript
 wi.getAccessToken()
   .then(access_token => {
-	// do something.
+  // do something.
   });
 
 // or in async function
